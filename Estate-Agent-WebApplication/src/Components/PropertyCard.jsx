@@ -1,8 +1,16 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { Heart, MapPin, Bed, Calendar } from 'lucide-react';
 import './styles/PropertyCard.css';
 
 const PropertyCard = ({ property, onClick, onAddToFavourites, onDragStart }) => {
+  const navigate = useNavigate();
+
+  const handleViewDetails = () => {
+    if (typeof onClick === 'function') onClick();
+    navigate(`/property/${property.id}`);
+  };
+
   return (
     <div
       draggable
@@ -47,7 +55,7 @@ const PropertyCard = ({ property, onClick, onAddToFavourites, onDragStart }) => 
         </div>
         
         <button
-          onClick={onClick}
+          onClick={handleViewDetails}
           className="property-details-btn"
         >
           View Details
@@ -59,6 +67,7 @@ const PropertyCard = ({ property, onClick, onAddToFavourites, onDragStart }) => 
 
 PropertyCard.propTypes = {
   property: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     images: PropTypes.array.isRequired,
     shortDesc: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -66,7 +75,7 @@ PropertyCard.propTypes = {
     location: PropTypes.string.isRequired,
     dateAdded: PropTypes.string.isRequired,
   }).isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   onAddToFavourites: PropTypes.func.isRequired,
   onDragStart: PropTypes.func.isRequired,
 };

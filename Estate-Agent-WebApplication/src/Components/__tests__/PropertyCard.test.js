@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import PropertyCard from '../PropertyCard';
 
@@ -23,41 +24,69 @@ describe('PropertyCard Component', () => {
   };
 
   test('renders property price', () => {
-    render(<PropertyCard {...mockProps} />);
+    render(
+      <MemoryRouter>
+        <PropertyCard {...mockProps} />
+      </MemoryRouter>
+    );
     expect(screen.getByText(/450,000/)).toBeInTheDocument();
   });
 
   test('renders property image', () => {
-    render(<PropertyCard {...mockProps} />);
+    render(
+      <MemoryRouter>
+        <PropertyCard {...mockProps} />
+      </MemoryRouter>
+    );
     const image = screen.getByRole('img', { hidden: true });
     expect(image).toHaveAttribute('src', 'https://example.com/image1.jpg');
   });
 
   test('renders property location', () => {
-    render(<PropertyCard {...mockProps} />);
+    render(
+      <MemoryRouter>
+        <PropertyCard {...mockProps} />
+      </MemoryRouter>
+    );
     expect(screen.getByText('London, Camden')).toBeInTheDocument();
   });
 
   test('renders property bedrooms', () => {
-    render(<PropertyCard {...mockProps} />);
+    render(
+      <MemoryRouter>
+        <PropertyCard {...mockProps} />
+      </MemoryRouter>
+    );
     expect(screen.getByText(/2.*bed/)).toBeInTheDocument();
   });
 
   test('renders View Details button', () => {
-    render(<PropertyCard {...mockProps} />);
+    render(
+      <MemoryRouter>
+        <PropertyCard {...mockProps} />
+      </MemoryRouter>
+    );
     expect(screen.getByRole('button', { name: /View Details/i })).toBeInTheDocument();
   });
 
   test('calls onClick when View Details is clicked', async () => {
     const user = userEvent.setup();
-    render(<PropertyCard {...mockProps} />);
+    render(
+      <MemoryRouter>
+        <PropertyCard {...mockProps} />
+      </MemoryRouter>
+    );
     const detailsButton = screen.getByRole('button', { name: /View Details/i });
     await user.click(detailsButton);
     expect(mockProps.onClick).toHaveBeenCalled();
   });
 
   test('has draggable attribute', () => {
-    const { container } = render(<PropertyCard {...mockProps} />);
+    const { container } = render(
+      <MemoryRouter>
+        <PropertyCard {...mockProps} />
+      </MemoryRouter>
+    );
     const card = container.querySelector('.property-card');
     expect(card).toHaveAttribute('draggable', 'true');
   });

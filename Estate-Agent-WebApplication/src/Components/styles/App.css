@@ -1,0 +1,48 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main app container */
+.app-container {
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+/* Main content area */
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.main-area {
+  flex: 1;
+}
+
+/* Responsive layout */
+@media (min-width: 1024px) {
+  .content-wrapper {
+    flex-direction: row;
+  }
+
+  .main-area {
+    flex: 1;
+  }
+}
